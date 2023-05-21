@@ -40,11 +40,17 @@ function App() {
       canvas: canvasRef.current,
     });
     renderer.setSize(sizes.width, sizes.height);
+    renderer.setPixelRatio(2);
     renderer.render(scene, camera);
 
     //orbit controls
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
+    controls.enablePan = false;
+    controls.enableZoom = false;
+    controls.autoRotate = true;
+    controls.autoRotateSpeed = 5;
+
     //resize
     window.addEventListener("resize", () => {
       //update sizes
