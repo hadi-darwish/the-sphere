@@ -49,10 +49,17 @@ function App() {
 
       //update camera
       camera.aspect = sizes.width / sizes.height;
+      camera.updateProjectionMatrix();
 
       //update renderer
       renderer.setSize(sizes.width, sizes.height);
     });
+
+    const loop = () => {
+      window.requestAnimationFrame(loop);
+      renderer.render(scene, camera);
+    };
+    loop();
   });
   return (
     <>
