@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
-import gsqp from "gsap";
+import gsap from "gsap";
 import "./App.css";
 
 function App() {
@@ -11,7 +11,11 @@ function App() {
 
     //create a sphere
     const geometry = new THREE.SphereGeometry(3, 64, 64);
-    const material = new THREE.MeshStandardMaterial({ color: 0x0000ff });
+    const material = new THREE.MeshStandardMaterial({
+      color: "#aa3355",
+      metalness: 0.7,
+      roughness: 0.5,
+    });
     const sphere = new THREE.Mesh(geometry, material);
     scene.add(sphere);
 
@@ -24,6 +28,7 @@ function App() {
     //create a light
     const light = new THREE.PointLight(0xffffff, 1, 100);
     light.position.set(0, 10, 10);
+    light.intensity = 1.25;
     scene.add(light);
 
     //create a camera
@@ -74,15 +79,42 @@ function App() {
     loop();
 
     //animation
-    const t1 = gsqp.timeline({
+    const t1 = gsap.timeline({
       defaults: { duration: 1 },
     });
-    const t2 = gsqp.timeline({
+    const t2 = gsap.timeline({
       defaults: { duration: 1 },
     });
     t1.fromTo(sphere.scale, { x: 0, y: 0, z: 0 }, { x: 1, y: 1, z: 1 });
     t2.fromTo("nav", { y: "-100%" }, { y: "0%" });
     t1.fromTo(".title", { opacity: 0 }, { opacity: 1 });
+
+    //mouse animation color
+    let mouseDown = false;
+    let rgb = [];
+    window.addEventListener("mousedown", () => {
+      mouseDown = true;
+    });
+    window.addEventListener("mouseup", () => {
+      mouseDown = false;
+    });
+    window.addEventListener("mousemove", (e) => {
+      if (mouseDown) {
+        rgb = [
+          Math.round((e.pageX / sizes.width) * 255),
+          Math.round((e.pageY / sizes.height) * 255),
+          Math.round(
+            ((e.pageX + e.pageY) / (sizes.width + sizes.height)) * 255
+          ),
+        ];
+        let newColor = new THREE.Color(`rgb(${rgb.join(",")})`);
+        gsap.to(sphere.material.color, {
+          r: newColor.r,
+          g: newColor.g,
+          b: newColor.b,
+        });
+      }
+    });
   }, []);
   return (
     <>
