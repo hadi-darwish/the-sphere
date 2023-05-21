@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import "./App.css";
 
 function App() {
@@ -41,6 +42,9 @@ function App() {
     renderer.setSize(sizes.width, sizes.height);
     renderer.render(scene, camera);
 
+    //orbit controls
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
     //resize
     window.addEventListener("resize", () => {
       //update sizes
@@ -56,6 +60,7 @@ function App() {
     });
 
     const loop = () => {
+      controls.update();
       window.requestAnimationFrame(loop);
       renderer.render(scene, camera);
     };
