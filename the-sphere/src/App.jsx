@@ -11,6 +11,9 @@ function App() {
   const sphere = new THREE.Mesh(geometry, material);
   scene.add(sphere);
 
+  //create a camera
+  const camera = new THREE.PerspectiveCamera(45, 800, 600);
+  scene.add(camera);
   return <></>;
 }
 
