@@ -14,7 +14,17 @@ function App() {
   //create a camera
   const camera = new THREE.PerspectiveCamera(45, 800, 600);
   scene.add(camera);
-  return <></>;
+
+  //create a renderer
+  const canvas = document.querySelector(".webgl");
+  const renderer = new THREE.WebGLRenderer({ canvas });
+  renderer.setSize(800, 600);
+  renderer.render(scene, camera);
+  return (
+    <>
+      <canvas className="webgl"></canvas>
+    </>
+  );
 }
 
 export default App;
