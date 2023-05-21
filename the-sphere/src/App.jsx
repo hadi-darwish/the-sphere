@@ -75,6 +75,14 @@ function App() {
   return (
     <>
       <canvas className="webgl" id="webgl" ref={canvasRef}></canvas>
+      <nav>
+        <a href="/">The Sphere</a>
+        <ul>
+          <li>Explore</li>
+          <li>Create</li>
+        </ul>
+      </nav>
+      <h1 className="title">Give it a spin</h1>
     </>
   );
 }
