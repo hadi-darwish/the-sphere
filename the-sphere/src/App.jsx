@@ -8,18 +8,29 @@ function App() {
     const scene = new THREE.Scene();
 
     //create a sphere
-    const geometry = new THREE.SphereGeometry(5, 32, 32);
+    const geometry = new THREE.SphereGeometry(3, 64, 64);
     const material = new THREE.MeshStandardMaterial({ color: 0x0000ff });
     const sphere = new THREE.Mesh(geometry, material);
     scene.add(sphere);
 
+    //adding sizes
+    const sizes = {
+      width: window.innerWidth,
+      height: window.innerHeight,
+    };
+
     //create a light
     const light = new THREE.PointLight(0xffffff, 1, 100);
-    light.position.set(0, 5, 10);
+    light.position.set(0, 10, 10);
     scene.add(light);
 
     //create a camera
-    const camera = new THREE.PerspectiveCamera(45, 800 / 600);
+    const camera = new THREE.PerspectiveCamera(
+      45,
+      sizes.width / sizes.height,
+      0.1,
+      100
+    );
     camera.position.z = 20;
     scene.add(camera);
 
@@ -27,7 +38,7 @@ function App() {
     const renderer = new THREE.WebGLRenderer({
       canvas: canvasRef.current,
     });
-    renderer.setSize(800, 600);
+    renderer.setSize(sizes.width, sizes.height);
     renderer.render(scene, camera);
   });
   return (
