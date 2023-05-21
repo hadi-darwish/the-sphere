@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import gsqp from "gsap";
 import "./App.css";
 
 function App() {
@@ -71,7 +72,18 @@ function App() {
       renderer.render(scene, camera);
     };
     loop();
-  });
+
+    //animation
+    const t1 = gsqp.timeline({
+      defaults: { duration: 1 },
+    });
+    const t2 = gsqp.timeline({
+      defaults: { duration: 1 },
+    });
+    t1.fromTo(sphere.scale, { x: 0, y: 0, z: 0 }, { x: 1, y: 1, z: 1 });
+    t2.fromTo("nav", { y: "-100%" }, { y: "0%" });
+    t1.fromTo(".title", { opacity: 0 }, { opacity: 1 });
+  }, []);
   return (
     <>
       <canvas className="webgl" id="webgl" ref={canvasRef}></canvas>
