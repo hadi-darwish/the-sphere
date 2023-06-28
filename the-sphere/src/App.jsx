@@ -124,7 +124,6 @@ function App() {
         <ul>
           <li>Explore</li>
           <li>Create</li>
-          <li></li>
         </ul>
       </nav>
       <h1 className="title">Give it a spin</h1>
