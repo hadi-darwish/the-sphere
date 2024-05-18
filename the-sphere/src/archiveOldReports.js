@@ -34,4 +34,4 @@ async function archiveOldReports() {
 }
 
 // Export the function so it can be imported and called in a Next.js page
-module.exports = archiveOldReports;
+export default archiveOldReports;
