@@ -3,7 +3,7 @@ import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import gsap from "gsap";
 import "./App.css";
-import admin from "firebase-admin";
+import { admin } from "firebase-admin";
 
 function App() {
   const canvasRef = useRef(null);
