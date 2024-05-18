@@ -1,8 +1,4 @@
-// const admin = require("firebase-admin");
 import * as admin from "firebase-admin";
-
-// Initialize Firebase
-// const serviceAccount = require("./serviceAccountKey.json"); // path to your Firebase service account key file
 import serviceAccount from "./serviceAccountKey.json";
 
 admin.initializeApp({
@@ -11,7 +7,6 @@ admin.initializeApp({
 
 const db = admin.firestore();
 
-// Create a function to archive old reports
 async function archiveOldReports() {
   const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000);
   const snapshot = await db
@@ -34,5 +29,4 @@ async function archiveOldReports() {
   }
 }
 
-// Export the function so it can be imported and called in a Next.js page
 export default archiveOldReports;
