@@ -3,10 +3,12 @@ import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import gsap from "gsap";
 import "./App.css";
+import archiveOldReports from "./archiveOldReports";
 
 function App() {
   const canvasRef = useRef(null);
   useEffect(() => {
+    archiveOldReports();
     const scene = new THREE.Scene();
 
     //create a sphere
