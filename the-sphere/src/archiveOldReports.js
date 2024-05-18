@@ -1,8 +1,9 @@
-/* eslint-disable no-undef */
-const admin = require("firebase-admin");
+// const admin = require("firebase-admin");
+import * as admin from "firebase-admin";
 
 // Initialize Firebase
-const serviceAccount = require("./serviceAccountKey.json"); // path to your Firebase service account key file
+// const serviceAccount = require("./serviceAccountKey.json"); // path to your Firebase service account key file
+import serviceAccount from "./serviceAccountKey.json";
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
